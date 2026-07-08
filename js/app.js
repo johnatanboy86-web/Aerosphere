@@ -1,20 +1,32 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    console.log("AeroSphere V2");
+    console.log("✈ AeroSphere V2");
 
-    const menu = document.querySelectorAll(".nav");
+    initNavigation();
+    animateCards();
+    startClock();
 
-    menu.forEach(item => {
+});
 
-        item.addEventListener("click", () => {
+function initNavigation() {
 
-            menu.forEach(i => i.classList.remove("active"));
+    const buttons = document.querySelectorAll(".nav");
 
-            item.classList.add("active");
+    buttons.forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            buttons.forEach(b => b.classList.remove("active"));
+
+            button.classList.add("active");
 
         });
 
     });
+
+}
+
+function animateCards() {
 
     const cards = document.querySelectorAll(".card");
 
@@ -22,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         card.addEventListener("mouseenter", () => {
 
-            card.style.transform = "translateY(-6px)";
+            card.style.transform = "translateY(-8px)";
 
         });
 
@@ -34,4 +46,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-});
+}
+
+function startClock() {
+
+    const subtitle = document.querySelector("header p");
+
+    if (!subtitle) return;
+
+    function updateClock() {
+
+        const now = new Date();
+
+        subtitle.textContent =
+            "Real-Time Aircraft Engine Operations • " +
+            now.toLocaleTimeString("fr-FR");
+
+    }
+
+    updateClock();
+
+    setInterval(updateClock, 1000);
+
+}
